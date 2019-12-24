@@ -1,0 +1,27 @@
+{
+  "name": "express-clarch-todo",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "test": "tape test/**/*.tape.js | tap-nirvana"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "kill-port": "^1.6.0",
+    "mongoose": "^5.8.3",
+    "morgan": "~1.9.1",
+    "tape": "^4.11.0"
+  },
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "supertest": "^4.0.2",
+    "tap-nirvana": "^1.1.0"
+  }
+}
