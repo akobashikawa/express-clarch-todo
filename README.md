@@ -4,9 +4,9 @@ Aplicando Clean Architecture en Express
 
 ## Idea
 
-Cómo organizar el código de modo los _entities_, los _usecases_, los _controllers_, puedan ser fácilmente testeados y usados tal cual, o casi tal cual, en otro framework.
+Cómo organizar el código de modo que los _entities_, los _usecases_, los _controllers_, puedan ser fácilmente testeados y usados tal cual, o casi tal cual, en otro framework.
 
-La lógica del negocio debería ser independiente del framework. Y ser unida al framework a través de _adapters_, que aquí se llaman _makers_ (parece más fácil de asimilar).
+La lógica del negocio debería ser independiente del framework. Y ser unida al framework a través de _adapters_ (que aquí los llamo _makers_, por facilidad).
 
 En los `routes`, cada _callback_ se obtiene a través de un _callback maker_ al que se se le pasa el _controller_ como parámetro. De esa manera, al _callback_ se le inyecta el _controller_ como dependencia.
 
@@ -25,12 +25,13 @@ En los `entities`, cada _entity_ se obtiene a través de un _entity maker_. De e
 
 ## Flujo
 
-- En `routes`, para cada ruta, un _maker_ pasa un controller y obtiene el callback que se necesita.
-- En `controllers`, para cada controller, un _maker_ pasa un use-case y obtiene el controller que se necesita. Los controllers se apoyan en usecases que les son pasados como dependencias.
-- En `usecases`, para cada use case, un _maker_ pasa un entity y obtiene el use case que se necesita. Los usecases se apoyan en entities que les son pasados como dependencias.
-- En `entities`. para cada entity, un _maker_ obtiene el object que se necesita.
+- En `routes`, para cada ruta, un _maker_ pasa un _controller_ y obtiene el _callback_ que se necesita.
+- En `controllers`, para cada _controller_, un _maker_ pasa un _usecase_ y obtiene el _controller_ que se necesita. Los _controllers_ se apoyan en _usecases_ que les son pasados como dependencias.
+- En `usecases`, para cada _usecase_, un _maker_ pasa un _entity_ y obtiene el _usecase_ que se necesita. Los _usecases_ se apoyan en _entities_ que les son pasados como dependencias.
+- En `entities`. para cada _entity_, un _maker_ obtiene el object que se necesita.
+
 - En cada caso, al invocar el _maker_ se pueden pasar las dependencias hacia adentro.
-- En cada directorio, el `index` amalgama los _adapters_ que se definen en los otros archivos.
+- En cada directorio, el `index` amalgama los _makers_ que se definen en los otros archivos.
 
 ## Referencias
 - [The Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
