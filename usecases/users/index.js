@@ -1,6 +1,6 @@
-const getUsersUseCaseAdapter = require('./getUsers');
-const { User } = require('../../entities/users/User');
+const { User } = require('../../entities/users');
+const getItemsUseCaseMaker = require('./getItems');
 
-const getUsersUseCase = getUsersUseCaseAdapter({ User });
+const getItemsUseCase = getItemsUseCaseMaker({ User });
 
-module.exports = { getUsersUseCase };
+module.exports = { getItemsUseCase };

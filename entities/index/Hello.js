@@ -1,4 +1,4 @@
-module.exports = function HelloAdapter() {
+module.exports = function HelloMaker() {
   return function Hello({ greeting }) {
     this.greeting = greeting || 'Hello';
 

@@ -1,65 +1,50 @@
-require('dotenv').config();
-
 var express = require('express');
 var router = express.Router();
 
-const { getCallbackAdapter } = require('../express-callback');
-const { getUsersController } = require('../controllers/users');
+const {
+    getItemsController,
+    addItemController,
+} = require('../controllers/users');
 
-const mongoose = require('mongoose');
+const getItemsCallbackMaker = ({controller}) => {
 
-mongoose.connect(`${process.env.MONGO_URL}`, { useNewUrlParser: true, useUnifiedTopology: true });
+    return async function (req, res) {
+        const request = {};
+        const result = {};
+        try {
+            const response = await controller(request);
+            console.log('response', response);
+            result.response = response;
+            res.json(result);
+        } catch (error) {
+            console.log(error);
+            result.message = 'Error listando items';
+            res.status(500).json(result);
+        }
+    };
+};
 
-const User = mongoose.model('User', { name: String });
+router.get('/', getItemsCallbackMaker({ controller: getItemsController }));
 
-// const db = mongoose.connection;
-// db.once('open', _ => {
-//     console.log('Database connected:', url)
-// });
-
-// db.on('error', err => {
-//     console.error('connection error:', err)
-// });
-
-// const getUsersCallback = getCallbackAdapter({ controller: getUsersController });
-// router.get('/', getUsersCallback);
-router.get('/', async function (req, res) {
-    try {
-        const result = await User.find();
-        const response = {
-            result
-        };
-        res.json(response);
-    } catch (error) {
-        console.log(error);
-        const response = {
-            message: 'Error listando items',
-        };
-        res.status(500).json(response);
+const addItemCallbackMaker = function({controller}) {
+    return async function (req, res) {
+        const name = req.body['name'];
+        const request = { name };
+        const result = { name };
+        try {
+            const response = await controller(request);
+            console.log(response);
+            result.response = response;
+            res.json(result);
+        } catch (error) {
+            console.log(error);
+            result.message = 'Error agregando item';
+            res.status(500).json(result);
+        }
     }
-});
+};
 
-router.post('/', async function (req, res) {
-    const name = req.body['name'];
-    const newItem = new User({ name });
-    try {
-        const result = await newItem.save();
-        console.log(result);
-        const response = {
-            name,
-            message: 'Item agregado',
-            result
-        };
-        res.json(response);
-    } catch (error) {
-        console.log(error);
-        const response = {
-            name,
-            message: 'Error agregando item',
-        };
-        res.status(500).json(response);
-    }
-});
+router.post('/', addItemCallbackMaker({controller: addItemController}));
 
 router.get('/:id', async function (req, res) {
     const id = req.params['id'];

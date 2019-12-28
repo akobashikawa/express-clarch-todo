@@ -1,7 +1,5 @@
-module.exports = function UserAdapter() {
+module.exports = function UserMaker({getItems}) {
     return function User() {
-        this.getItems = function () {
-            return [];
-        };
+        this.getItems = getItems;
     };
 };

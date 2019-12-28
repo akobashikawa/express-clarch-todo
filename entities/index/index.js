@@ -1,5 +1,5 @@
-const HelloAdapter = require('./Hello');
+const HelloMaker = require('./Hello');
 
-const Hello = HelloAdapter();
+const Hello = HelloMaker();
 
 module.exports = { Hello };
