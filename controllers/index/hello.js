@@ -1,4 +1,4 @@
-module.exports = function homeControllerMaker(helloUseCase) {
+module.exports = function helloControllerMaker(helloUseCase) {
   return function (req) {
     const message = helloUseCase('Express');
     const response = { message };

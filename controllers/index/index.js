@@ -1,6 +1,7 @@
-const homeControllerAdapter = require('./home');
-const { sayHelloUseCase } = require('../../usecases/index');
+const indexUsecases = require('../../usecases/index');
 
-const homeController = homeControllerAdapter({ sayHelloUseCase });
+const homeControllerMaker = require('./home');
+const helloControllerMaker = require('./hello');
 
-module.exports = { homeController };
+exports.home = homeControllerMaker(indexUsecases.hello);
+exports.hello = helloControllerMaker(indexUsecases.hello);
