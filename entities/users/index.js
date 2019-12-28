@@ -21,4 +21,7 @@ exports.User = UserMaker({
     const user = new UserModel({name});
     return user.save();
   },
+  getItem: (id) => UserModel.findById(id),
+  updateItem: ({ id, name }) => UserModel.findByIdAndUpdate(id, { $set: { name } }, { new: true }),
+  deleteItem: (id) => UserModel.findByIdAndRemove(id),
 });
