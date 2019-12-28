@@ -1,51 +1,17 @@
 var express = require('express');
 var router = express.Router();
 
-const {
-    getItemsController,
-    addItemController,
-} = require('../controllers/users');
+const usersControllers = require('../controllers/users');
 
-const getItemsCallbackMaker = ({controller}) => {
+const {callbackMaker} = require('./callback');
 
-    return async function (req, res) {
-        const request = {};
-        const result = {};
-        try {
-            const response = await controller(request);
-            console.log('response', response);
-            result.response = response;
-            res.json(result);
-        } catch (error) {
-            console.log(error);
-            result.message = 'Error listando items';
-            res.status(500).json(result);
-        }
-    };
-};
+router.get('/', callbackMaker(usersControllers.getItems) );
+router.post('/', callbackMaker(usersControllers.addItem) );
+router.get('/:id', callbackMaker(usersControllers.getItem) );
+router.put('/:id', callbackMaker(usersControllers.updateItem) );
+router.delete('/:id', callbackMaker(usersControllers.deleteItem) );
 
-router.get('/', getItemsCallbackMaker({ controller: getItemsController }));
-
-const addItemCallbackMaker = function({controller}) {
-    return async function (req, res) {
-        const name = req.body['name'];
-        const request = { name };
-        const result = { name };
-        try {
-            const response = await controller(request);
-            console.log(response);
-            result.response = response;
-            res.json(result);
-        } catch (error) {
-            console.log(error);
-            result.message = 'Error agregando item';
-            res.status(500).json(result);
-        }
-    }
-};
-
-router.post('/', addItemCallbackMaker({controller: addItemController}));
-
+/*
 router.get('/:id', async function (req, res) {
     const id = req.params['id'];
     try {
@@ -109,6 +75,7 @@ router.delete('/:id', async function (req, res) {
         res.status(500).json(response);
     }
 });
+*/
 
 
 module.exports = router;
