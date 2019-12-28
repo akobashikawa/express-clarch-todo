@@ -1,9 +1,9 @@
 const test = require('tape');
 
-const { sayHelloUseCase } = require('../../usecases');
+const indexUsecases = require('../../usecases/index');
 
-test('sayHelloUseCase', function (t) {
-  const actual = sayHelloUseCase('Express');
+test('hello', function (t) {
+  const actual = indexUsecases.hello('Express');
   const expected = 'Hello Express';
   const message = 'return message';
   t.same(actual, expected, message);
