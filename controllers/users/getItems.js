@@ -1,6 +1,6 @@
-module.exports = function getItemsControllerMaker({usecase}) {
-    return async function getItemsController() {
-        const items = await usecase();
-        return items;
+module.exports = function getItemsControllerMaker({ getItemsUseCase}) {
+    return async function getItemsController(request) {
+        const response = await getItemsUseCase();
+        return response;
     };
 };

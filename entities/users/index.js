@@ -16,7 +16,11 @@ const UserModel = mongoose.model('User', { name: String });
 const UserMaker = require('./User');
 
 const User = UserMaker({
-  getItems: () => UserModel.find()
+  getItems: () => UserModel.find(),
+  addItem: ({name}) => {
+    const user = new UserModel({name});
+    return user.save();
+  },
 });
 
 module.exports = { User };

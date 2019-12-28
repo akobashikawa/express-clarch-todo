@@ -1,6 +1,12 @@
-const { getItemsUseCase } = require('../../usecases/users/index');
+const { 
+  getItemsUseCase, 
+  addItemUseCase 
+} = require('../../usecases/users');
+
 const getItemsControllerMaker = require('./getItems');
+const addItemControllerMaker = require('./addItem');
 
-const getItemsController = getItemsControllerMaker({usecase: getItemsUseCase});
+const getItemsController = getItemsControllerMaker({getItemsUseCase});
+const addItemController = addItemControllerMaker({addItemUseCase});
 
-module.exports = { getItemsController };
+module.exports = { getItemsController, addItemController };
