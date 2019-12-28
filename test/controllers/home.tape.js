@@ -1,9 +1,9 @@
 const test = require('tape');
 
-const { homeController } = require('../../controllers/index');
+const indexControllers = require('../../controllers/index');
 
-test('homeController', function (t) {
-  const actual = homeController();
+test('indexController.home', function (t) {
+  const actual = indexControllers.home();
   const expected = { message: 'Hello Express' };
   const message = 'return json with message';
   t.same(actual, expected, message);
