@@ -1,6 +1,5 @@
-const helloUseCaseAdapter = require('./sayHello');
 const { Hello } = require('../../entities/index');
 
-const sayHelloUseCase = helloUseCaseAdapter({ Hello });
+const helloUseCaseMaker = require('./hello');
 
-module.exports = { sayHelloUseCase };
+exports.hello = helloUseCaseMaker(Hello);

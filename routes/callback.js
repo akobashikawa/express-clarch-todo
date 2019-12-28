@@ -1,5 +1,5 @@
 exports.callbackMaker = function(controller) {
-  return async function (req, res) {
+  return async (req, res) => {
     const request = {
       params: req.params,
       query: req.query,
@@ -13,5 +13,24 @@ exports.callbackMaker = function(controller) {
       console.log(error);
       res.send(error);
     }
+  };
+};
+
+exports.renderCallbackMaker = function ({ controller, view }) {
+  return (req, res) => {
+    const response = controller(req);
+    res.render(view, response);
+  };
+};
+
+exports.syncCallbackMaker = function (controller) {
+  return (req, res) => {
+    const request = {
+      params: req.params,
+      query: req.query,
+      body: req.body,
+    };
+    const response = controller(request);
+    res.json(response);
   };
 };
