@@ -1,14 +1,20 @@
 var express = require('express');
 var router = express.Router();
 
-const usersControllers = require('../controllers/users');
+const {
+  getItemsController,
+  addItemController,
+  getItemController,
+  updateItemController,
+  deleteItemController,
+} = require('../controllers/users');
 
 const {callbackMaker} = require('./callback');
 
-router.get('/', callbackMaker(usersControllers.getItems) );
-router.post('/', callbackMaker(usersControllers.addItem) );
-router.get('/:id', callbackMaker(usersControllers.getItem) );
-router.put('/:id', callbackMaker(usersControllers.updateItem) );
-router.delete('/:id', callbackMaker(usersControllers.deleteItem) );
+router.get('/', callbackMaker(getItemsController) );
+router.post('/', callbackMaker(addItemController) );
+router.get('/:id', callbackMaker(getItemController) );
+router.put('/:id', callbackMaker(updateItemController) );
+router.delete('/:id', callbackMaker(deleteItemController) );
 
 module.exports = router;

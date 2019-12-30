@@ -25,7 +25,7 @@ const User = UserMaker({
     return user.save();
   },
   getItem: (id) => UserModel.findById(id),
-  updateItem: ({ id, name }) => UserModel.findByIdAndUpdate(id, { $set: { name } }, { new: true }),
+  updateItem: ({ id, name }) => UserModel.findByIdAndUpdate(id, { $set: { name } }, { new: true, useFindAndModify: false }),
   deleteItem: (id) => UserModel.findByIdAndRemove(id),
 });
 
@@ -53,8 +53,16 @@ const getItemControllerMaker = require('./getItem');
 const updateItemControllerMaker = require('./updateItem');
 const deleteItemControllerMaker = require('./deleteItem');
 
-exports.getItems = getItemsControllerMaker(getItemsUseCase);
-exports.addItem = addItemControllerMaker(addItemUseCase);
-exports.getItem = getItemControllerMaker(getItemUseCase);
-exports.updateItem = updateItemControllerMaker(updateItemUseCase);
-exports.deleteItem = deleteItemControllerMaker(deleteItemUseCase);
+const getItemsController = getItemsControllerMaker(getItemsUseCase);
+const addItemController = addItemControllerMaker(addItemUseCase);
+const getItemController = getItemControllerMaker(getItemUseCase);
+const updateItemController = updateItemControllerMaker(updateItemUseCase);
+const deleteItemController = deleteItemControllerMaker(deleteItemUseCase);
+
+module.exports = {
+  getItemsController,
+  addItemController,
+  getItemController,
+  updateItemController,
+  deleteItemController,
+};
