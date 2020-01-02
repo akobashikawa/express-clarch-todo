@@ -38,3 +38,4 @@ La lógica del negocio debería ser independiente del framework. Y ser unida al 
 - [Tap Nirvana - Proper Reporter](https://github.com/inadarei/tap-nirvana)
 - [RITEway](https://github.com/ericelliott/riteway)
 - [Testing Express APIs with Tape and Supertest](https://puigcerber.com/2015/11/27/testing-express-apis-with-tape-and-supertest/)
+- [Hexagonal architecture in JavaScript](https://dzone.com/articles/hexagonal-architecture)
