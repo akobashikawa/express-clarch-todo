@@ -20,7 +20,7 @@
     "tape": "^4.11.0"
   },
   "devDependencies": {
-    "cheerio": "^1.0.0-rc.3",
+    "cheerio": "^1.0.0-rc.12",
     "supertest": "^4.0.2",
     "tap-nirvana": "^1.1.0"
   }
